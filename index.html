@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CCA Skills Survey</title>
+  <title>Modern Skills Survey</title>
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
@@ -25,7 +25,7 @@
       height: 100vh;
       pointer-events: none;
       z-index: 50;
-      opacity: 0.04; /* Very subtle texture */
+      opacity: 0.04;
       background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
       mix-blend-mode: multiply;
     }
@@ -44,11 +44,29 @@
 
     /* Main Container Styling */
     .main-card {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.95);
       box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.08);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    /* Full Width Navy Header */
+    .section-header {
+      background-color: #1e3a8a; /* Light Navy Blue */
+      color: #ffffff;
+      padding: 2rem 2rem 2.5rem 2rem;
+      margin: -2rem -2rem 2rem -2rem;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+      border-bottom: 4px solid #f97316; /* Orange Accent */
+    }
+
+    @media (min-width: 768px) {
+      .section-header {
+        padding: 2.5rem 3rem 3rem 3rem;
+        margin: -3rem -3rem 2.5rem -3rem;
+      }
     }
 
     /* Modern Inputs */
@@ -56,12 +74,12 @@
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       transition: all 0.3s ease;
-      color: #0f172a; /* Dark Navy Text */
+      color: #0f172a;
     }
     
     .modern-input:focus:not(:disabled) {
       background: #ffffff;
-      border-color: #1e3a8a; /* Light Navy Blue Focus */
+      border-color: #1e3a8a;
       box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.08);
       outline: none;
       transform: translateY(-2px);
@@ -70,10 +88,11 @@
     /* Disabled State Styling */
     .modern-input:disabled {
       background: #f1f5f9;
-      color: #94a3b8;
-      border-color: #cbd5e1;
+      color: #cbd5e1;
+      border-color: #e2e8f0;
       cursor: not-allowed;
-      opacity: 0.5;
+      opacity: 0.6;
+      transform: none;
     }
 
     /* Step Transitions */
@@ -87,6 +106,9 @@
       display: block;
       opacity: 1;
       transform: translateX(0);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
     }
     .step-container.exit {
       transform: translateX(-30px);
@@ -95,7 +117,7 @@
 
     /* Buttons */
     .btn-primary {
-      background: #f97316; /* Light Deep Orange */
+      background: #f97316;
       transition: all 0.3s ease;
       color: white;
       box-shadow: 0 8px 20px -6px rgba(249, 115, 22, 0.4);
@@ -107,8 +129,8 @@
     }
     
     .btn-secondary {
-      background: #f8fafc;
-      color: #1e3a8a; /* Light Navy Blue */
+      background: #ffffff;
+      color: #1e3a8a;
       border: 1px solid #cbd5e1;
       transition: all 0.3s ease;
     }
@@ -134,25 +156,27 @@
 </head>
 <body class="flex items-center justify-center p-4 md:p-8">
 
+  <!-- Fine Grain Noise Texture -->
   <div class="noise-overlay"></div>
 
+  <!-- Abstract Line Art Background -->
   <svg class="abstract-lines" viewBox="0 0 1440 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <g fill="none">
       <path d="M-100,500 C200,300 400,700 800,500 C1100,350 1300,600 1500,450" stroke="#1e3a8a" stroke-width="1.5" opacity="0.15" />
       <path d="M-100,520 C220,320 420,720 820,520 C1120,370 1320,620 1500,470" stroke="#1e3a8a" stroke-width="1.5" opacity="0.15" />
       <path d="M-100,540 C240,340 440,740 840,540 C1140,390 1340,640 1500,490" stroke="#1e3a8a" stroke-width="1.5" opacity="0.15" />
-      
       <path d="M-100,150 C300,50 600,250 900,100 C1200,-50 1400,200 1600,150" stroke="#f97316" stroke-width="1" opacity="0.1" />
       <path d="M-100,170 C320,70 620,270 920,120 C1220,-30 1420,220 1600,170" stroke="#f97316" stroke-width="1" opacity="0.1" />
     </g>
   </svg>
 
-  <main class="main-card w-full max-w-5xl rounded-[2rem] p-8 md:p-12 relative overflow-hidden text-slate-800 z-10">
+  <main class="main-card w-full max-w-5xl rounded-[2rem] p-8 md:p-12 relative overflow-hidden text-slate-800 z-10 shadow-2xl">
     
-    <section id="step1" class="step-container active space-y-8">
-      <div class="space-y-2 border-b border-slate-200 pb-4">
-        <h1 class="text-4xl font-black tracking-tight text-slate-900">CCA Skills Survey</h1>
-        <h2 class="text-xl font-bold text-[#1e3a8a]">Cebu Contractors Association, Inc.</h2>
+    <!-- STEP 1: Introduction & Profile -->
+    <section id="step1" class="step-container active">
+      <div class="section-header">
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight">Skills Survey</h1>
+        <h2 class="text-lg md:text-xl font-medium text-blue-200 mt-2">Cover Letter & Profile</h2>
       </div>
       
       <div class="space-y-4 text-slate-600 font-medium text-base leading-relaxed">
@@ -163,7 +187,7 @@
         <p class="pt-2 font-bold text-slate-900">Thank you,<br>CCA Technical Working Group</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8 mb-8">
         <div>
           <label class="block text-[#1e3a8a] font-bold mb-1 text-sm">Company *</label>
           <input type="text" id="company" class="modern-input w-full rounded-xl p-3 font-medium">
@@ -186,22 +210,27 @@
         </div>
       </div>
 
-      <div class="flex justify-end pt-4">
-        <button onclick="navigate(1, 2)" class="btn-primary font-bold py-3 px-10 rounded-xl">
-          Next &rarr;
-        </button>
+      <div class="flex justify-end mt-auto pt-4">
+        <button onclick="navigate(1, 2)" class="btn-primary font-bold py-3 px-10 rounded-xl">Next &rarr;</button>
+      </div>
+      
+      <!-- Footer Branding -->
+      <div class="mt-8 pt-6 border-t border-slate-200 text-center opacity-80">
+        <p class="text-xs font-bold text-[#1e3a8a] uppercase tracking-wide">Cebu Contractors Association, Inc.</p>
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-0.5">Skills Survey</p>
       </div>
     </section>
 
-    <section id="step2" class="step-container space-y-6">
-      <div class="space-y-2 border-b border-slate-200 pb-4">
-        <h1 class="text-3xl font-black tracking-tight text-slate-900">Civil Works</h1>
-        <p class="text-slate-500 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
+    <!-- STEP 2: Civil Works -->
+    <section id="step2" class="step-container">
+      <div class="section-header">
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight">Civil Works</h1>
+        <p class="text-blue-200 font-medium mt-2">Please provide skills data to help CCA plan program/s for your company.</p>
       </div>
       
-      <div class="bg-white rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-slate-200">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-slate-200 mb-8">
         <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-[#f8fafc] text-[#1e3a8a]">
+          <thead class="text-xs uppercase bg-[#f8fafc] text-[#1e3a8a] border-b border-slate-200">
             <tr>
               <th class="px-6 py-4 font-bold min-w-[150px]">Type of Skills</th>
               <th class="px-4 py-4 font-bold">Currently Used</th>
@@ -216,16 +245,17 @@
               const civilSkills = ['Carpentry', 'Formworks', 'Masonry', 'Scaffold erection', 'Steel works', 'Welding'];
               civilSkills.forEach(skill => {
                 document.write(`
-                  <tr class="hover:bg-slate-50/50 transition-colors">
+                  <tr class="hover:bg-slate-50/50 transition-colors group">
                     <td class="px-6 py-4 font-bold text-slate-800 skill-name">${skill}</td>
                     <td class="px-4 py-4">
                       <select class="modern-input w-full rounded-lg p-2 font-semibold currently-used">
-                        <option value="Yes">Yes</option><option value="No">No</option>
+                        <option value="No" selected>No</option>
+                        <option value="Yes">Yes</option>
                       </select>
                     </td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc prospective w-full rounded-lg p-2 text-center font-bold"></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc prospective w-full rounded-lg p-2 text-center font-bold" disabled></td>
                     <td class="px-4 py-4 font-black text-xl text-center row-total text-[#f97316]">0</td>
                   </tr>
                 `);
@@ -235,21 +265,27 @@
         </table>
       </div>
 
-      <div class="flex justify-between pt-6">
+      <div class="flex justify-between mt-auto pt-4">
         <button onclick="navigate(2, 1)" class="btn-secondary font-bold py-3 px-8 rounded-xl">&larr; Back</button>
         <button onclick="navigate(2, 3)" class="btn-primary font-bold py-3 px-10 rounded-xl">Next &rarr;</button>
       </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-200 text-center opacity-80">
+        <p class="text-xs font-bold text-[#1e3a8a] uppercase tracking-wide">Cebu Contractors Association, Inc.</p>
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-0.5">Skills Survey</p>
+      </div>
     </section>
 
-    <section id="step3" class="step-container space-y-6">
-      <div class="space-y-2 border-b border-slate-200 pb-4">
-        <h1 class="text-3xl font-black tracking-tight text-slate-900">Specialty & Finishing Works</h1>
-        <p class="text-slate-500 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
+    <!-- STEP 3: Specialty and finishing works -->
+    <section id="step3" class="step-container">
+      <div class="section-header">
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight">Specialty & Finishing</h1>
+        <p class="text-blue-200 font-medium mt-2">Please provide skills data to help CCA plan program/s for your company.</p>
       </div>
       
-      <div class="bg-white rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-slate-200">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-slate-200 mb-8">
         <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-[#f8fafc] text-[#1e3a8a]">
+          <thead class="text-xs uppercase bg-[#f8fafc] text-[#1e3a8a] border-b border-slate-200">
             <tr>
               <th class="px-6 py-4 font-bold min-w-[150px]">Type of Skills</th>
               <th class="px-4 py-4 font-bold">Currently Used</th>
@@ -268,12 +304,13 @@
                     <td class="px-6 py-4 font-bold text-slate-800 skill-name">${skill}</td>
                     <td class="px-4 py-4">
                       <select class="modern-input w-full rounded-lg p-2 font-semibold currently-used">
-                        <option value="Yes">Yes</option><option value="No">No</option>
+                        <option value="No" selected>No</option>
+                        <option value="Yes">Yes</option>
                       </select>
                     </td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc prospective w-full rounded-lg p-2 text-center font-bold"></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc prospective w-full rounded-lg p-2 text-center font-bold" disabled></td>
                     <td class="px-4 py-4 font-black text-xl text-center row-total text-[#f97316]">0</td>
                   </tr>
                 `);
@@ -283,21 +320,27 @@
         </table>
       </div>
 
-      <div class="flex justify-between pt-6">
+      <div class="flex justify-between mt-auto pt-4">
         <button onclick="navigate(3, 2)" class="btn-secondary font-bold py-3 px-8 rounded-xl">&larr; Back</button>
         <button onclick="navigate(3, 4)" class="btn-primary font-bold py-3 px-10 rounded-xl">Next &rarr;</button>
       </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-200 text-center opacity-80">
+        <p class="text-xs font-bold text-[#1e3a8a] uppercase tracking-wide">Cebu Contractors Association, Inc.</p>
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-0.5">Skills Survey</p>
+      </div>
     </section>
 
-    <section id="step4" class="step-container space-y-6">
-      <div class="space-y-2 border-b border-slate-200 pb-4">
-        <h1 class="text-3xl font-black tracking-tight text-slate-900">Heavy Equipment</h1>
-        <p class="text-slate-500 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
+    <!-- STEP 4: Heavy Equipment -->
+    <section id="step4" class="step-container">
+      <div class="section-header">
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight">Heavy Equipment</h1>
+        <p class="text-blue-200 font-medium mt-2">Please provide skills data to help CCA plan program/s for your company.</p>
       </div>
       
-      <div class="bg-white rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-slate-200">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-slate-200 mb-8">
         <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-[#f8fafc] text-[#1e3a8a]">
+          <thead class="text-xs uppercase bg-[#f8fafc] text-[#1e3a8a] border-b border-slate-200">
             <tr>
               <th class="px-6 py-4 font-bold min-w-[150px]">Type of Skills</th>
               <th class="px-4 py-4 font-bold">Currently Used</th>
@@ -316,12 +359,13 @@
                     <td class="px-6 py-4 font-bold text-slate-800 skill-name">${skill}</td>
                     <td class="px-4 py-4">
                       <select class="modern-input w-full rounded-lg p-2 font-semibold currently-used">
-                        <option value="Yes">Yes</option><option value="No">No</option>
+                        <option value="No" selected>No</option>
+                        <option value="Yes">Yes</option>
                       </select>
                     </td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc prospective w-full rounded-lg p-2 text-center font-bold"></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc prospective w-full rounded-lg p-2 text-center font-bold" disabled></td>
                     <td class="px-4 py-4 font-black text-xl text-center row-total text-[#f97316]">0</td>
                   </tr>
                 `);
@@ -331,21 +375,27 @@
         </table>
       </div>
 
-      <div class="flex justify-between pt-6">
+      <div class="flex justify-between mt-auto pt-4">
         <button onclick="navigate(4, 3)" class="btn-secondary font-bold py-3 px-8 rounded-xl">&larr; Back</button>
         <button onclick="navigate(4, 5)" class="btn-primary font-bold py-3 px-10 rounded-xl">Next &rarr;</button>
       </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-200 text-center opacity-80">
+        <p class="text-xs font-bold text-[#1e3a8a] uppercase tracking-wide">Cebu Contractors Association, Inc.</p>
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-0.5">Skills Survey</p>
+      </div>
     </section>
 
-    <section id="step5" class="step-container space-y-6">
-      <div class="space-y-2 border-b border-slate-200 pb-4">
-        <h1 class="text-3xl font-black tracking-tight text-slate-900">Other Skills</h1>
-        <p class="text-slate-500 font-medium">Other skills not mentioned above that are relevant to your operations.</p>
+    <!-- STEP 5: Other Skills -->
+    <section id="step5" class="step-container">
+      <div class="section-header">
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight">Other Skills</h1>
+        <p class="text-blue-200 font-medium mt-2">Other skills not mentioned above that are relevant to your operations.</p>
       </div>
       
       <div class="bg-white rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-slate-200">
         <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-[#f8fafc] text-[#1e3a8a]">
+          <thead class="text-xs uppercase bg-[#f8fafc] text-[#1e3a8a] border-b border-slate-200">
             <tr>
               <th class="px-6 py-4 font-bold min-w-[200px]">Specific Skill Name</th>
               <th class="px-4 py-4 font-bold text-center">No TESDA NC</th>
@@ -354,9 +404,10 @@
               <th class="px-4 py-4 font-bold text-center">Total</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-100">
+          <tbody id="otherSkillsBody" class="divide-y divide-slate-100">
+            <!-- Defaulting to 3 rows -->
             <script>
-              for(let i=0; i<5; i++) {
+              for(let i=0; i<3; i++) {
                 document.write(`
                   <tr class="hover:bg-slate-50/50 transition-colors">
                     <td class="px-4 py-4">
@@ -374,15 +425,27 @@
         </table>
       </div>
 
-      <div class="flex justify-between pt-6">
+      <!-- Add Slot Button -->
+      <button type="button" onclick="addOtherSkillRow()" class="mt-4 text-[#1e3a8a] font-bold hover:text-[#f97316] transition-colors flex items-center mb-8 inline-flex px-2">
+        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+        Add New Slot
+      </button>
+
+      <div class="flex justify-between mt-auto pt-4 border-t border-slate-100">
         <button onclick="navigate(5, 4)" class="btn-secondary font-bold py-3 px-8 rounded-xl">&larr; Back</button>
         <button onclick="navigate(5, 6)" class="btn-primary font-bold py-3 px-10 rounded-xl">Next &rarr;</button>
       </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-200 text-center opacity-80">
+        <p class="text-xs font-bold text-[#1e3a8a] uppercase tracking-wide">Cebu Contractors Association, Inc.</p>
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-0.5">Skills Survey</p>
+      </div>
     </section>
 
-    <section id="step6" class="step-container space-y-6">
-      <div class="space-y-2 border-b border-slate-200 pb-4">
-        <h1 class="text-4xl font-black tracking-tight text-slate-900">Ready to Submit</h1>
+    <!-- STEP 6: Final Section -->
+    <section id="step6" class="step-container">
+      <div class="section-header">
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight">Ready to Submit</h1>
       </div>
       
       <div class="space-y-4 text-slate-600 font-medium text-lg">
@@ -391,14 +454,15 @@
         <p class="pt-2 font-bold text-[#1e3a8a]">Thank you once again.<br>CCA Technical Working Group & Secretariat</p>
       </div>
 
-      <div class="space-y-4 mt-6">
+      <!-- Additional Remarks Section -->
+      <div class="space-y-4 mt-6 mb-8">
         <div>
           <label class="block text-[#1e3a8a] font-bold mb-2 text-sm uppercase tracking-wide">Additional Remarks</label>
-          <textarea id="remarksData" rows="3" class="modern-input w-full rounded-xl p-4 font-medium resize-none placeholder-slate-400" placeholder="Type your comments here..."></textarea>
+          <textarea id="remarksData" rows="4" class="modern-input w-full rounded-xl p-4 font-medium resize-none placeholder-slate-400" placeholder="Type your comments here..."></textarea>
         </div>
       </div>
 
-      <div class="flex justify-between pt-8">
+      <div class="flex justify-between mt-auto pt-4">
         <button onclick="navigate(6, 5)" class="btn-secondary font-bold py-3 px-8 rounded-xl">
           &larr; Back
         </button>
@@ -406,10 +470,17 @@
           Submit Survey
         </button>
       </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-200 text-center opacity-80">
+        <p class="text-xs font-bold text-[#1e3a8a] uppercase tracking-wide">Cebu Contractors Association, Inc.</p>
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-0.5">Skills Survey</p>
+      </div>
     </section>
 
+    <!-- STEP 7: Success / Loading Screen -->
     <section id="step7" class="step-container text-center space-y-6 py-16">
       
+      <!-- Loading Animation -->
       <div id="loadingState" class="space-y-6">
         <div class="inline-block relative w-20 h-20">
           <div class="absolute top-0 left-0 w-full h-full border-4 border-slate-200 rounded-full"></div>
@@ -418,6 +489,7 @@
         <h2 class="text-2xl font-bold text-slate-800 animate-pulse">Processing Submission...</h2>
       </div>
 
+      <!-- Success State -->
       <div id="successState" class="hidden space-y-6">
         <div class="mx-auto w-24 h-24 bg-[#f97316] rounded-full flex items-center justify-center shadow-xl transform scale-0 animate-[popIn_0.5s_ease-out_forwards]">
           <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
@@ -426,6 +498,10 @@
         <p class="text-slate-600 font-medium text-lg">Your data has been securely recorded. A confirmation email has been dispatched to your inbox.</p>
       </div>
 
+      <div class="mt-auto pt-16 border-t border-slate-200 text-center opacity-80">
+        <p class="text-xs font-bold text-[#1e3a8a] uppercase tracking-wide">Cebu Contractors Association, Inc.</p>
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-0.5">Skills Survey</p>
+      </div>
     </section>
 
   </main>
@@ -435,11 +511,12 @@
     // IMPORTANT: Keep your Apps Script URL here!
     const APPS_SCRIPT_URL = "YOUR_WEB_APP_URL_HERE";
 
-    // --- 2. Conditional Logic (Skip/Disable) & Real-time Math ---
+    // --- 2. Event Delegation for Logic (Dropdowns & Auto-Sum) ---
+    // Using event delegation so dynamically added "Other Skills" rows still calculate properly
     
-    // Disable logic for Yes/No dropdowns
-    document.querySelectorAll('.currently-used').forEach(select => {
-      select.addEventListener('change', (e) => {
+    // Listen for dropdown changes
+    document.addEventListener('change', (e) => {
+      if (e.target.classList.contains('currently-used')) {
         const row = e.target.closest('tr');
         const inputs = row.querySelectorAll('.row-calc');
         const total = row.querySelector('.row-total');
@@ -457,21 +534,38 @@
             input.disabled = false;
           });
         }
-      });
+      }
     });
 
-    // Auto-sum math logic
-    document.querySelectorAll('.row-calc').forEach(input => {
-      input.addEventListener('input', (e) => {
+    // Listen for number input changes for Auto-Sum
+    document.addEventListener('input', (e) => {
+      if (e.target.classList.contains('row-calc')) {
         const row = e.target.closest('tr');
         const noNc = parseInt(row.querySelector('.no-nc').value) || 0;
         const withNc = parseInt(row.querySelector('.with-nc').value) || 0;
         const prospective = parseInt(row.querySelector('.prospective').value) || 0;
         row.querySelector('.row-total').textContent = noNc + withNc + prospective;
-      });
+      }
     });
 
-    // --- 3. Smooth Page Transitions ---
+    // --- 3. Dynamic Slots Feature ---
+    function addOtherSkillRow() {
+      const tbody = document.getElementById('otherSkillsBody');
+      const row = document.createElement('tr');
+      row.className = 'hover:bg-slate-50/50 transition-colors';
+      row.innerHTML = `
+        <td class="px-4 py-4">
+          <input type="text" class="modern-input other-skill-name w-full rounded-lg p-2 font-semibold" placeholder="Input other skills...">
+        </td>
+        <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold"></td>
+        <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold"></td>
+        <td class="px-4 py-4"><input type="number" min="0" value="0" class="modern-input row-calc prospective w-full rounded-lg p-2 text-center font-bold"></td>
+        <td class="px-4 py-4 font-black text-xl text-center row-total text-[#f97316]">0</td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    // --- 4. Smooth Page Transitions ---
     function navigate(fromStep, toStep) {
       if(fromStep === 1 && toStep === 2) {
         // Validation check for Step 1
@@ -493,18 +587,18 @@
         fromEl.style.display = 'none';
         fromEl.classList.remove('exit');
         
-        toEl.style.display = 'block';
+        toEl.style.display = 'flex';
         void toEl.offsetWidth; // Force reflow
         toEl.classList.add('active');
       }, 400); 
     }
 
-    // --- 4. Native Apps Script Submission ---
+    // --- 5. Native Apps Script Submission ---
     async function submitSurvey() {
       // Transition to Loading Screen
       navigate(6, 7);
 
-      // Package the data for Apps Script (Remarks included again)
+      // Package the data for Apps Script
       const payload = {
         meta: {
           company: document.getElementById('company').value || "N/A",
