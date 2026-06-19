@@ -246,8 +246,8 @@
       </div>
     </section>
 
-     <!-- STEP 2: Main Content (Matrix) -->
-    <section id="step2" class="step-container space-y-6">
+     <!-- STEP 3: Main Content (Matrix) -->
+    <section id="step3" class="step-container space-y-6">
       <div class="space-y-2">
         <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Skills Inventory</h1>
         <p class="text-white/90 font-medium">Specialty and finishing works.</p>
@@ -359,7 +359,7 @@
     </section>
 
     <!-- STEP 3: Final Section -->
-    <section id="step3" class="step-container space-y-6">
+    <section id="step4" class="step-container space-y-6">
       <div class="space-y-2">
         <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">You have completed the survey.</h1>
       </div>
@@ -388,7 +388,7 @@
     </section>
 
     <!-- STEP 4: Success / Loading Screen -->
-    <section id="step4" class="step-container text-center space-y-6 py-16">
+    <section id="step5" class="step-container text-center space-y-6 py-16">
       
       <!-- Loading Animation -->
       <div id="loadingState" class="space-y-6">
@@ -429,7 +429,7 @@
 
     // --- 3. Smooth Page Transitions ---
     function navigate(fromStep, toStep) {
-      if(fromStep === 1 && toStep === 2) {
+      if(fromStep === 1 && toStep === 5) {
         // Validation check for Step 1
         const email = document.getElementById('email').value;
         const company = document.getElementById('company').value;
