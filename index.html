@@ -236,6 +236,78 @@
         </table>
       </div>
 
+        <!-- STEP 3: Main Content (Matrix) -->
+    <section id="step2" class="step-container space-y-6">
+      <div class="space-y-2">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Skills Inventory</h1>
+        <p class="text-white/90 font-medium">Specialty and finishing works</p>
+      </div>
+      
+      <div class="glass rounded-2xl overflow-hidden shadow-inner overflow-x-auto">
+        <table class="w-full text-sm text-left">
+          <thead class="text-xs uppercase bg-white/40 text-slate-800">
+            <tr>
+              <th class="px-6 py-4 font-bold">Type of Skills</th>
+              <th class="px-4 py-4 font-bold">These skills are currently used in our operations</th>
+              <th class="px-4 py-4 font-bold text-center">No. of workers with skills but no TESDA NC</th>
+              <th class="px-4 py-4 font-bold text-center">No. of workers with NC</th>
+              <th class="px-4 py-4 font-bold text-center">Prospective No. of Workers for Training or Upskilling</th>
+              <th class="px-4 py-4 font-bold text-center">Total</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/20">
+            <!-- Row 1 -->
+            <tr class="hover:bg-white/20 transition-colors">
+              <td class="px-6 py-4 font-bold text-slate-800 skill-name">Construction painting</td>
+              <td class="px-4 py-4">
+                <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
+                  <option value="No">No</option><option value="Yes">Yes</option>
+                </select>
+              </td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
+            </tr>
+            <!-- Row 2 -->
+            <tr class="hover:bg-white/20 transition-colors">
+              <td class="px-6 py-4 font-bold text-slate-800 skill-name">Electrical installation and maintenance</td>
+              <td class="px-4 py-4">
+                <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
+                  <option value="No">No</option><option value="Yes">Yes</option>
+                </select>
+              </td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
+            </tr>
+             <!-- Row 3 -->
+             <tr class="hover:bg-white/20 transition-colors">
+              <td class="px-6 py-4 font-bold text-slate-800 skill-name">Plumbing</td>
+              <td class="px-4 py-4">
+                <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
+                  <option value="No">No</option><option value="Yes">Yes</option>
+                </select>
+              </td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
+            </tr>
+            <!-- Row 4 -->
+             <tr class="hover:bg-white/20 transition-colors">
+              <td class="px-6 py-4 font-bold text-slate-800 skill-name">Tile setting</td>
+              <td class="px-4 py-4">
+                <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
+                  <option value="No">No</option><option value="Yes">Yes</option>
+                </select>
+              </td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
+              <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
+            </tr>
       <div class="flex justify-between pt-6">
         <button onclick="navigate(2, 1)" class="btn-hover bg-white/30 text-white font-bold py-3 px-8 rounded-xl backdrop-blur-sm border border-white/40 shadow-lg">
           &larr; Back
@@ -246,7 +318,7 @@
       </div>
     </section>
 
-    <!-- STEP 3: Final Section -->
+    <!-- STEP 4: Final Section -->
     <section id="step3" class="step-container space-y-6">
       <div class="space-y-2">
         <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">You have completed the survey.</h1>
