@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCA Skills Inventory Survey</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen py-8 px-4">
+  <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
+    
+    <!-- Cover Letter -->
+    <header class="border-b border-slate-100 pb-6 mb-8 space-y-4">
+      <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Skills Survey</h1>
+      <div class="text-sm text-slate-600 space-y-2">
+        <p>Dear CCA Member,</p>
+        <p>Great day. We are sending this Skills Survey to determine the technical training requirements of CCA members. This survey is particularly intended for contractors engaged in civil works and specialty works.</p>
+        <p>Accomplishing this survey would take approximately 5 minutes only. You may request your Human Resources in-charge to help accomplish this survey. By answering this survey, you are helping CCA craft a relevant training program that would improve the productivity of the workers and the competitiveness of its members.</p>
+        <p>Please accomplish this survey on or before June 26. Should you need assistance, please don't hesitate to call your CCA Secretariat.</p>
+        <p class="font-semibold pt-2">Thank you,<br>CCA Technical Working Group</p>
+      </div>
+    </header>
+
+    <form id="surveyForm" class="space-y-8">
+      <!-- Profile Information -->
+      <section class="space-y-4">
+        <h2 class="text-lg font-semibold text-slate-900 border-l-4 border-indigo-600 pl-3">Respondent Profile</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1">Company *</label>
+            <input type="text" id="company" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1">Representative who answered *</label>
+            <input type="text" id="representative" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1">Position / Designation *</label>
+            <input type="text" id="position" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1">Contact No. *</label>
+            <input type="text" id="contact" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm">
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-slate-600 mb-1">Email *</label>
+            <input type="email" id="email" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm">
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Matrix -->
+      <section class="space-y-4">
+        <h2 class="text-lg font-semibold text-slate-900 border-l-4 border-indigo-600 pl-3">Skills Inventory</h2>
+        <p class="text-xs text-slate-500">Please provide skills data to help CCA plan program/s for your company.</p>
+        
+        <div id="matrixContainer" class="space-y-8">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Remarks & Submit -->
+      <section class="space-y-4 border-t border-slate-100 pt-8">
+        <h2 class="text-lg font-semibold text-slate-900 border-l-4 border-indigo-600 pl-3">Additional Remarks</h2>
+        <p class="text-sm text-slate-600">If you have additional remarks or comments, please write these on the space provided below. If none, you may click the submit button.</p>
+        <textarea id="remarks" rows="4" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm" placeholder="Enter remarks here..."></textarea>
+      </section>
+
+      <div class="pt-4">
+        <button type="submit" id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-xl transition duration-200 text-sm shadow-sm">
+          Submit Survey
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyJiadEtzvx-XL6jfhZIHcO8DBmwJFRzHFWjdkFd9aSC7RJau4genup1ahMen4Bn4-1_w/exec";
+
+    // Survey Data Structure based on CCA Requirements
+    const surveyData = [
+      {
+        category: "Civil Works",
+        skills: ["Carpentry", "Formworks", "Masonry", "Scaffold erection", "Steel works", "Welding"]
+      },
+      {
+        category: "Specialty and finishing works",
+        skills: ["Construction painting", "Electrical installation and maintenance", "Plumbing", "Tile setting"]
+      },
+      {
+        category: "Heavy equipment",
+        skills: ["Backhow", "Excavator", "Bulldozer", "Roadroller", "Forklift", "Crane"]
+      }
+    ];
+
+    const matrixContainer = document.getElementById('matrixContainer');
+
+    // Dynamically build the forms
+    surveyData.forEach(section => {
+      let html = `<div class="bg-slate-50/50 p-4 rounded-xl border border-slate-200"><h3 class="font-bold text-slate-800 mb-4">${section.category}</h3><div class="space-y-3">`;
+      
+      section.skills.forEach(skill => {
+        html += generateRow(section.category, skill, false);
+      });
+      
+      html += `</div></div>`;
+      matrixContainer.insertAdjacentHTML('beforeend', html);
+    });
+
+    // Add "Other Skills" section
+    let otherHtml = `<div class="bg-slate-50/50 p-4 rounded-xl border border-slate-200"><h3 class="font-bold text-slate-800 mb-4">Other skills not mentioned above</h3><div class="space-y-3">`;
+    for(let i = 1; i <= 5; i++) {
+      otherHtml += generateRow("Other Skills", "", true);
+    }
+    otherHtml += `</div></div>`;
+    matrixContainer.insertAdjacentHTML('beforeend', otherHtml);
+
+    // Row Template Generator
+    function generateRow(category, skill, isOther) {
+      const skillInput = isOther ? `<input type="text" placeholder="Input other skills" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500 skill-name-input">` : `<span class="font-medium text-slate-900 text-sm block skill-name-label">${skill}</span>`;
+      const yesNoInput = isOther ? `` : `<div>
+        <label class="block md:hidden text-[10px] uppercase font-bold text-slate-400 mb-1">Currently Used?</label>
+        <select class="currently-used w-full bg-white border border-slate-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+          <option value="No">No</option><option value="Yes">Yes</option>
+        </select>
+      </div>`;
+
+      return `
+        <div class="skill-row grid grid-cols-1 md:grid-cols-6 gap-3 items-center" data-category="${category}" ${!isOther ? `data-skill="${skill}"` : ''}>
+          <div class="md:col-span-2">${skillInput}</div>
+          ${yesNoInput}
+          <div>
+            <label class="block md:hidden text-[10px] uppercase font-bold text-slate-400 mb-1">No TESDA NC</label>
+            <input type="number" min="0" value="0" class="num-input no-nc w-full bg-white border border-slate-200 rounded-lg p-2 text-sm text-center">
+          </div>
+          <div>
+            <label class="block md:hidden text-[10px] uppercase font-bold text-slate-400 mb-1">With NC</label>
+            <input type="number" min="0" value="0" class="num-input with-nc w-full bg-white border border-slate-200 rounded-lg p-2 text-sm text-center">
+          </div>
+          <div>
+            <label class="block md:hidden text-[10px] uppercase font-bold text-slate-400 mb-1">Prospective No.</label>
+            <input type="number" min="0" value="0" class="num-input prospective w-full bg-white border border-slate-200 rounded-lg p-2 text-sm text-center">
+          </div>
+          <div class="bg-slate-200/50 p-2 rounded-lg text-center font-semibold text-slate-700 text-sm hidden md:block row-total border border-slate-200">
+            0
+          </div>
+        </div>`;
+    }
+
+    // Auto-Sum Logic
+    matrixContainer.addEventListener('input', function(e) {
+      if (e.target.classList.contains('num-input')) {
+        const row = e.target.closest('.skill-row');
+        const noNc = parseInt(row.querySelector('.no-nc').value) || 0;
+        const withNc = parseInt(row.querySelector('.with-nc').value) || 0;
+        const prospective = parseInt(row.querySelector('.prospective').value) || 0;
+        row.querySelector('.row-total').textContent = noNc + withNc + prospective;
+      }
+    });
+
+    // Form Submission
+    document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = "Submitting...";
+      btn.disabled = true;
+      
+      const payload = {
+        meta: {
+          company: document.getElementById('company').value,
+          representative: document.getElementById('representative').value,
+          position: document.getElementById('position').value,
+          contact: document.getElementById('contact').value,
+          email: document.getElementById('email').value,
+          remarks: document.getElementById('remarks').value
+        },
+        skillsData: []
+      };
+
+      document.querySelectorAll('.skill-row').forEach(row => {
+        let skillName = row.getAttribute('data-skill');
+        if(!skillName) {
+           const inputEl = row.querySelector('.skill-name-input');
+           skillName = inputEl ? inputEl.value : "";
+        }
+        
+        // Skip empty "Other" rows
+        if(skillName.trim() === "") return;
+
+        const category = row.getAttribute('data-category');
+        const usedEl = row.querySelector('.currently-used');
+        const currentlyUsed = usedEl ? usedEl.value : "N/A";
+        
+        const noNc = parseInt(row.querySelector('.no-nc').value) || 0;
+        const withNc = parseInt(row.querySelector('.with-nc').value) || 0;
+        const prospective = parseInt(row.querySelector('.prospective').value) || 0;
+        const total = noNc + withNc + prospective;
+
+        // Only send rows that have some data to prevent database bloat
+        if(total > 0 || currentlyUsed === "Yes") {
+          payload.skillsData.push({
+            category: category, skillName: skillName, currentlyUsed: currentlyUsed,
+            noNc: noNc, withNc: withNc, prospective: prospective, total: total
+          });
+        }
+      });
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+        });
+        alert("Thank you! Your survey responses have been registered.");
+        document.getElementById('surveyForm').reset();
+        document.querySelectorAll('.row-total').forEach(el => el.textContent = "0");
+      } catch (err) {
+        alert("Error sending response data. Please check your internet connection.");
+      } finally {
+        btn.textContent = "Submit Survey";
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
