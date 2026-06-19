@@ -3,50 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CCA Skills Survey</title>
+  <title>Modern Skills Survey</title>
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    /* Animated Gradient Background */
+    /* Modern Light Blue & Soft Orange Gradient Background */
     body {
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
+      background: radial-gradient(circle at 15% 50%, rgba(224, 242, 254, 0.8), transparent 50%),
+                  radial-gradient(circle at 85% 30%, rgba(254, 215, 170, 0.6), transparent 50%),
+                  #ffffff;
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-    }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* Glassmorphism Styling */
+    /* Abstract Curved Lines Overlay (Mimicking the reference image) */
+    .abstract-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* Glassmorphism Styling - Adjusted for lighter palette */
     .glass {
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 10px 40px 0 rgba(14, 42, 71, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
     .glass-input {
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(226, 232, 240, 1);
       transition: all 0.3s ease;
+      color: #1e293b;
     }
-    .glass-input:focus {
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    
+    .glass-input:focus:not(:disabled) {
+      background: #ffffff;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
       outline: none;
       transform: translateY(-2px);
+    }
+
+    /* Disabled State Styling */
+    .glass-input:disabled {
+      background: #f1f5f9;
+      color: #94a3b8;
+      border-color: #e2e8f0;
+      cursor: not-allowed;
+      opacity: 0.6;
     }
 
     /* Step Transitions */
     .step-container {
       display: none;
       opacity: 0;
-      transform: translateX(50px);
+      transform: translateX(30px);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .step-container.active {
@@ -55,117 +76,139 @@
       transform: translateX(0);
     }
     .step-container.exit {
-      transform: translateX(-50px);
+      transform: translateX(-30px);
       opacity: 0;
     }
 
     /* Micro-animations */
-    .btn-hover {
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      transition: all 0.3s ease;
+      color: white;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 10px 20px rgba(234, 88, 12, 0.2);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.8);
+      color: #0369a1;
+      border: 1px solid #bae6fd;
       transition: all 0.3s ease;
     }
-    .btn-hover:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    .btn-secondary:hover {
+      background: #f0f9ff;
+      transform: translateY(-2px);
     }
-    .btn-hover:active {
-      transform: translateY(1px) scale(0.98);
-    }
-
-    /* Custom Scrollbar for matrix */
-    ::-webkit-scrollbar { height: 8px; width: 8px; }
-    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.5); border-radius: 10px; }
 
     /* Success pop-in animation */
     @keyframes popIn {
-      0% { transform: scale(0); }
-      80% { transform: scale(1.1); }
+      0% { transform: scale(0); opacity: 0; }
+      80% { transform: scale(1.1); opacity: 1; }
       100% { transform: scale(1); }
     }
   </style>
 </head>
 <body class="flex items-center justify-center p-4 md:p-8">
 
+  <!-- Abstract Line Art Background -->
+  <svg class="abstract-lines" viewBox="0 0 1440 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#cbd5e1" stroke-width="1.5" fill="none">
+      <path d="M-100,500 C200,300 400,700 800,500 C1100,350 1300,600 1500,450" />
+      <path d="M-100,520 C220,320 420,720 820,520 C1120,370 1320,620 1500,470" />
+      <path d="M-100,540 C240,340 440,740 840,540 C1140,390 1340,640 1500,490" />
+      <path d="M-100,560 C260,360 460,760 860,560 C1160,410 1360,660 1500,510" />
+      <path d="M-100,580 C280,380 480,780 880,580 C1180,430 1380,680 1500,530" />
+      
+      <path d="M-100,150 C300,50 600,250 900,100 C1200,-50 1400,200 1600,150" stroke-width="1" opacity="0.5" />
+      <path d="M-100,170 C320,70 620,270 920,120 C1220,-30 1420,220 1600,170" stroke-width="1" opacity="0.5" />
+      <path d="M-100,190 C340,90 640,290 940,140 C1240,-10 1440,240 1600,190" stroke-width="1" opacity="0.5" />
+    </g>
+  </svg>
+
   <main class="glass w-full max-w-5xl rounded-3xl p-8 md:p-12 relative overflow-hidden text-slate-800">
     
+    <!-- STEP 1: Introduction & Profile -->
     <section id="step1" class="step-container active space-y-8">
-      <div class="space-y-2">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">CCA Skills Survey</h1>
-        <h2 class="text-xl font-semibold text-white/90">Cebu Contractors Association, Inc.</h2>
+      <div class="space-y-2 border-b border-slate-200 pb-4">
+        <h1 class="text-4xl font-black tracking-tight text-slate-900">Skills Survey</h1>
+        <h2 class="text-xl font-bold text-sky-700">Cover Letter & Profile</h2>
       </div>
       
-      <div class="glass p-6 rounded-2xl space-y-4 text-slate-800 font-medium text-base leading-relaxed shadow-inner">
+      <div class="space-y-4 text-slate-700 font-medium text-base leading-relaxed">
         <p>Dear CCA Member,</p>
         <p>Great day. We are sending this Skills Survey to determine the technical training requirements of CCA members. This survey is particularly intended for contractors engaged in civil works and specialty works.</p>
         <p>Accomplishing this survey would take approximately 5 minutes only. You may request your Human Resources in-charge to help accomplish this survey. By answering this survey, you are helping CCA craft a relevant training program that would improve the productivity of the workers and the competitiveness of its members.</p>
         <p>Please accomplish this survey on or before June 26. Should you need assistance, please don't hesitate to call your CCA Secretariat.</p>
-        <p class="pt-2 font-bold">Thank you,<br>CCA Technical Working Group</p>
+        <p class="pt-2 font-bold text-slate-900">Thank you,<br>CCA Technical Working Group</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Respondent Profile Form -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
         <div>
-          <label class="block text-white font-bold mb-1 drop-shadow-md text-sm">Company *</label>
-          <input type="text" id="company" class="glass-input w-full rounded-xl p-3 text-slate-800 font-medium">
+          <label class="block text-slate-700 font-bold mb-1 text-sm">Company *</label>
+          <input type="text" id="company" class="glass-input w-full rounded-xl p-3 font-medium">
         </div>
         <div>
-          <label class="block text-white font-bold mb-1 drop-shadow-md text-sm">Representative who answered *</label>
-          <input type="text" id="representative" class="glass-input w-full rounded-xl p-3 text-slate-800 font-medium">
+          <label class="block text-slate-700 font-bold mb-1 text-sm">Representative who answered *</label>
+          <input type="text" id="representative" class="glass-input w-full rounded-xl p-3 font-medium">
         </div>
         <div>
-          <label class="block text-white font-bold mb-1 drop-shadow-md text-sm">Position / Designation *</label>
-          <input type="text" id="position" class="glass-input w-full rounded-xl p-3 text-slate-800 font-medium">
+          <label class="block text-slate-700 font-bold mb-1 text-sm">Position / Designation *</label>
+          <input type="text" id="position" class="glass-input w-full rounded-xl p-3 font-medium">
         </div>
         <div>
-          <label class="block text-white font-bold mb-1 drop-shadow-md text-sm">Contact No. *</label>
-          <input type="text" id="contact" class="glass-input w-full rounded-xl p-3 text-slate-800 font-medium">
+          <label class="block text-slate-700 font-bold mb-1 text-sm">Contact No. *</label>
+          <input type="text" id="contact" class="glass-input w-full rounded-xl p-3 font-medium">
         </div>
         <div class="md:col-span-2">
-          <label class="block text-white font-bold mb-1 drop-shadow-md text-sm">Email Address (For Confirmation Copy) *</label>
-          <input type="email" id="email" class="glass-input w-full rounded-xl p-3 text-slate-800 font-medium" placeholder="your@email.com">
+          <label class="block text-slate-700 font-bold mb-1 text-sm">Email Address (For Confirmation Copy) *</label>
+          <input type="email" id="email" class="glass-input w-full rounded-xl p-3 font-medium" placeholder="your@email.com">
         </div>
       </div>
 
       <div class="flex justify-end pt-4">
-        <button onclick="navigate(1, 2)" class="btn-hover bg-white text-indigo-600 font-bold py-3 px-10 rounded-xl shadow-lg">
+        <button onclick="navigate(1, 2)" class="btn-primary font-bold py-3 px-10 rounded-xl shadow-md">
           Next &rarr;
         </button>
       </div>
     </section>
 
+    <!-- STEP 2: Civil Works -->
     <section id="step2" class="step-container space-y-6">
-      <div class="space-y-2">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Civil Works</h1>
-        <p class="text-white/90 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
+      <div class="space-y-2 border-b border-slate-200 pb-4">
+        <h1 class="text-3xl font-black tracking-tight text-slate-900">Civil Works</h1>
+        <p class="text-slate-600 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
       </div>
       
-      <div class="glass rounded-2xl overflow-hidden shadow-inner overflow-x-auto">
+      <div class="bg-white/40 rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-white">
         <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-white/40 text-slate-800">
+          <thead class="text-xs uppercase bg-slate-100/50 text-slate-600">
             <tr>
               <th class="px-6 py-4 font-bold min-w-[150px]">Type of Skills</th>
-              <th class="px-4 py-4 font-bold">These skills are currently used in our operations</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with skills but no TESDA NC</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with NC</th>
-              <th class="px-4 py-4 font-bold text-center">Prospective No. of Workers for Training or Upskilling</th>
+              <th class="px-4 py-4 font-bold">Currently Used</th>
+              <th class="px-4 py-4 font-bold text-center">No TESDA NC</th>
+              <th class="px-4 py-4 font-bold text-center">With NC</th>
+              <th class="px-4 py-4 font-bold text-center">Prospective Training</th>
               <th class="px-4 py-4 font-bold text-center">Total</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-white/20">
+          <tbody class="divide-y divide-slate-200/50">
             <script>
               const civilSkills = ['Carpentry', 'Formworks', 'Masonry', 'Scaffold erection', 'Steel works', 'Welding'];
               civilSkills.forEach(skill => {
                 document.write(`
-                  <tr class="hover:bg-white/20 transition-colors">
+                  <tr class="hover:bg-white/60 transition-colors">
                     <td class="px-6 py-4 font-bold text-slate-800 skill-name">${skill}</td>
                     <td class="px-4 py-4">
-                      <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
+                      <select class="glass-input w-full rounded-lg p-2 font-semibold currently-used">
                         <option value="No">No</option><option value="Yes">Yes</option>
                       </select>
                     </td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4 font-black text-xl text-center row-total text-sky-600">0</td>
                   </tr>
                 `);
               });
@@ -175,45 +218,46 @@
       </div>
 
       <div class="flex justify-between pt-6">
-        <button onclick="navigate(2, 1)" class="btn-hover bg-white/30 text-white font-bold py-3 px-8 rounded-xl backdrop-blur-sm border border-white/40 shadow-lg">&larr; Back</button>
-        <button onclick="navigate(2, 3)" class="btn-hover bg-white text-indigo-600 font-bold py-3 px-10 rounded-xl shadow-lg">Next &rarr;</button>
+        <button onclick="navigate(2, 1)" class="btn-secondary font-bold py-3 px-8 rounded-xl shadow-sm">&larr; Back</button>
+        <button onclick="navigate(2, 3)" class="btn-primary font-bold py-3 px-10 rounded-xl shadow-md">Next &rarr;</button>
       </div>
     </section>
 
+    <!-- STEP 3: Specialty and finishing works -->
     <section id="step3" class="step-container space-y-6">
-      <div class="space-y-2">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Specialty & Finishing Works</h1>
-        <p class="text-white/90 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
+      <div class="space-y-2 border-b border-slate-200 pb-4">
+        <h1 class="text-3xl font-black tracking-tight text-slate-900">Specialty & Finishing Works</h1>
+        <p class="text-slate-600 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
       </div>
       
-      <div class="glass rounded-2xl overflow-hidden shadow-inner overflow-x-auto">
+      <div class="bg-white/40 rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-white">
         <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-white/40 text-slate-800">
+          <thead class="text-xs uppercase bg-slate-100/50 text-slate-600">
             <tr>
               <th class="px-6 py-4 font-bold min-w-[150px]">Type of Skills</th>
-              <th class="px-4 py-4 font-bold">These skills are currently used in our operations</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with skills but no TESDA NC</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with NC</th>
-              <th class="px-4 py-4 font-bold text-center">Prospective No. of Workers for Training or Upskilling</th>
+              <th class="px-4 py-4 font-bold">Currently Used</th>
+              <th class="px-4 py-4 font-bold text-center">No TESDA NC</th>
+              <th class="px-4 py-4 font-bold text-center">With NC</th>
+              <th class="px-4 py-4 font-bold text-center">Prospective Training</th>
               <th class="px-4 py-4 font-bold text-center">Total</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-white/20">
+          <tbody class="divide-y divide-slate-200/50">
             <script>
               const specialtySkills = ['Construction painting', 'Electrical installation and maintenance', 'Plumbing', 'Tile setting'];
               specialtySkills.forEach(skill => {
                 document.write(`
-                  <tr class="hover:bg-white/20 transition-colors">
+                  <tr class="hover:bg-white/60 transition-colors">
                     <td class="px-6 py-4 font-bold text-slate-800 skill-name">${skill}</td>
                     <td class="px-4 py-4">
-                      <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
+                      <select class="glass-input w-full rounded-lg p-2 font-semibold currently-used">
                         <option value="No">No</option><option value="Yes">Yes</option>
                       </select>
                     </td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4 font-black text-xl text-center row-total text-sky-600">0</td>
                   </tr>
                 `);
               });
@@ -223,45 +267,46 @@
       </div>
 
       <div class="flex justify-between pt-6">
-        <button onclick="navigate(3, 2)" class="btn-hover bg-white/30 text-white font-bold py-3 px-8 rounded-xl backdrop-blur-sm border border-white/40 shadow-lg">&larr; Back</button>
-        <button onclick="navigate(3, 4)" class="btn-hover bg-white text-indigo-600 font-bold py-3 px-10 rounded-xl shadow-lg">Next &rarr;</button>
+        <button onclick="navigate(3, 2)" class="btn-secondary font-bold py-3 px-8 rounded-xl shadow-sm">&larr; Back</button>
+        <button onclick="navigate(3, 4)" class="btn-primary font-bold py-3 px-10 rounded-xl shadow-md">Next &rarr;</button>
       </div>
     </section>
 
+    <!-- STEP 4: Heavy Equipment -->
     <section id="step4" class="step-container space-y-6">
-      <div class="space-y-2">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Heavy Equipment</h1>
-        <p class="text-white/90 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
+      <div class="space-y-2 border-b border-slate-200 pb-4">
+        <h1 class="text-3xl font-black tracking-tight text-slate-900">Heavy Equipment</h1>
+        <p class="text-slate-600 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
       </div>
       
-      <div class="glass rounded-2xl overflow-hidden shadow-inner overflow-x-auto">
+      <div class="bg-white/40 rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-white">
         <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-white/40 text-slate-800">
+          <thead class="text-xs uppercase bg-slate-100/50 text-slate-600">
             <tr>
               <th class="px-6 py-4 font-bold min-w-[150px]">Type of Skills</th>
-              <th class="px-4 py-4 font-bold">These skills are currently used in our operations</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with skills but no TESDA NC</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with NC</th>
-              <th class="px-4 py-4 font-bold text-center">Prospective No. of Workers for Training or Upskilling</th>
+              <th class="px-4 py-4 font-bold">Currently Used</th>
+              <th class="px-4 py-4 font-bold text-center">No TESDA NC</th>
+              <th class="px-4 py-4 font-bold text-center">With NC</th>
+              <th class="px-4 py-4 font-bold text-center">Prospective Training</th>
               <th class="px-4 py-4 font-bold text-center">Total</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-white/20">
+          <tbody class="divide-y divide-slate-200/50">
             <script>
               const heavySkills = ['Backhoe', 'Excavator', 'Bulldozer', 'Roadroller', 'Forklift', 'Crane'];
               heavySkills.forEach(skill => {
                 document.write(`
-                  <tr class="hover:bg-white/20 transition-colors">
+                  <tr class="hover:bg-white/60 transition-colors">
                     <td class="px-6 py-4 font-bold text-slate-800 skill-name">${skill}</td>
                     <td class="px-4 py-4">
-                      <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
+                      <select class="glass-input w-full rounded-lg p-2 font-semibold currently-used">
                         <option value="No">No</option><option value="Yes">Yes</option>
                       </select>
                     </td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center font-bold" disabled></td>
+                    <td class="px-4 py-4 font-black text-xl text-center row-total text-sky-600">0</td>
                   </tr>
                 `);
               });
@@ -271,40 +316,42 @@
       </div>
 
       <div class="flex justify-between pt-6">
-        <button onclick="navigate(4, 3)" class="btn-hover bg-white/30 text-white font-bold py-3 px-8 rounded-xl backdrop-blur-sm border border-white/40 shadow-lg">&larr; Back</button>
-        <button onclick="navigate(4, 5)" class="btn-hover bg-white text-indigo-600 font-bold py-3 px-10 rounded-xl shadow-lg">Next &rarr;</button>
+        <button onclick="navigate(4, 3)" class="btn-secondary font-bold py-3 px-8 rounded-xl shadow-sm">&larr; Back</button>
+        <button onclick="navigate(4, 5)" class="btn-primary font-bold py-3 px-10 rounded-xl shadow-md">Next &rarr;</button>
       </div>
     </section>
 
+    <!-- STEP 5: Other Skills -->
     <section id="step5" class="step-container space-y-6">
-      <div class="space-y-2">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Other Skills</h1>
-        <p class="text-white/90 font-medium">Other skills not mentioned above that are relevant to your operations.</p>
+      <div class="space-y-2 border-b border-slate-200 pb-4">
+        <h1 class="text-3xl font-black tracking-tight text-slate-900">Other Skills</h1>
+        <p class="text-slate-600 font-medium">Other skills not mentioned above that are relevant to your operations.</p>
       </div>
       
-      <div class="glass rounded-2xl overflow-hidden shadow-inner overflow-x-auto">
+      <div class="bg-white/40 rounded-2xl overflow-hidden shadow-sm overflow-x-auto border border-white">
         <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-white/40 text-slate-800">
+          <thead class="text-xs uppercase bg-slate-100/50 text-slate-600">
             <tr>
               <th class="px-6 py-4 font-bold min-w-[200px]">Specific Skill Name</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with skills but no TESDA NC</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with NC</th>
-              <th class="px-4 py-4 font-bold text-center">Prospective No. of Workers for Training or Upskilling</th>
+              <th class="px-4 py-4 font-bold text-center">No TESDA NC</th>
+              <th class="px-4 py-4 font-bold text-center">With NC</th>
+              <th class="px-4 py-4 font-bold text-center">Prospective Training</th>
               <th class="px-4 py-4 font-bold text-center">Total</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-white/20">
+          <tbody class="divide-y divide-slate-200/50">
+            <!-- "Other Skills" do not have Yes/No logic, they are enabled by default -->
             <script>
               for(let i=0; i<5; i++) {
                 document.write(`
-                  <tr class="hover:bg-white/20 transition-colors">
+                  <tr class="hover:bg-white/60 transition-colors">
                     <td class="px-4 py-4">
-                      <input type="text" class="glass-input other-skill-name w-full rounded-lg p-2 text-slate-800 font-medium" placeholder="Input other skills...">
+                      <input type="text" class="glass-input other-skill-name w-full rounded-lg p-2 font-semibold" placeholder="Input other skills...">
                     </td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-                    <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center font-bold"></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center font-bold"></td>
+                    <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center font-bold"></td>
+                    <td class="px-4 py-4 font-black text-xl text-center row-total text-sky-600">0</td>
                   </tr>
                 `);
               }
@@ -314,55 +361,53 @@
       </div>
 
       <div class="flex justify-between pt-6">
-        <button onclick="navigate(5, 4)" class="btn-hover bg-white/30 text-white font-bold py-3 px-8 rounded-xl backdrop-blur-sm border border-white/40 shadow-lg">&larr; Back</button>
-        <button onclick="navigate(5, 6)" class="btn-hover bg-white text-indigo-600 font-bold py-3 px-10 rounded-xl shadow-lg">Next &rarr;</button>
+        <button onclick="navigate(5, 4)" class="btn-secondary font-bold py-3 px-8 rounded-xl shadow-sm">&larr; Back</button>
+        <button onclick="navigate(5, 6)" class="btn-primary font-bold py-3 px-10 rounded-xl shadow-md">Next &rarr;</button>
       </div>
     </section>
 
+    <!-- STEP 6: Final Section -->
     <section id="step6" class="step-container space-y-6">
-      <div class="space-y-2">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">You have completed the survey.</h1>
+      <div class="space-y-2 border-b border-slate-200 pb-4">
+        <h1 class="text-4xl font-black tracking-tight text-slate-900">Ready to Submit</h1>
       </div>
       
-      <div class="glass p-6 rounded-2xl space-y-4 text-slate-800 font-medium text-lg shadow-inner">
+      <div class="space-y-4 text-slate-700 font-medium text-lg">
         <p>Thank you for accomplishing this skills survey. The Secretariat of CCA will review and consolidate the responses of the members who participated in the survey. We will contact you soon for the next steps of this program.</p>
-        <p>If you have additional remarks or comments, please write these on the space provided below. If none, you may click the submit button.</p>
-        <p class="pt-2 font-bold text-slate-800">Thank you once again.<br>CCA Technical Working Group & Secretariat</p>
+        <p class="pt-2 font-bold text-slate-900">Thank you once again.<br>CCA Technical Working Group & Secretariat</p>
       </div>
 
-      <div class="space-y-4">
-        <div>
-          <label class="block text-white font-bold mb-2 drop-shadow-md">Additional Remarks</label>
-          <textarea id="remarksData" rows="3" class="glass-input w-full rounded-xl p-4 text-slate-800 font-medium resize-none placeholder-slate-600" placeholder="Type your comments here..."></textarea>
-        </div>
-      </div>
+      <!-- REMOVED: "Additional Remarks" section as requested -->
 
-      <div class="flex justify-between pt-6">
-        <button onclick="navigate(6, 5)" class="btn-hover bg-white/30 text-white font-bold py-3 px-8 rounded-xl backdrop-blur-sm border border-white/40 shadow-lg">
+      <div class="flex justify-between pt-8">
+        <button onclick="navigate(6, 5)" class="btn-secondary font-bold py-3 px-8 rounded-xl shadow-sm">
           &larr; Back
         </button>
-        <button onclick="submitSurvey()" id="submitBtn" class="btn-hover bg-gradient-to-r from-emerald-400 to-teal-500 text-white font-extrabold py-3 px-12 rounded-xl shadow-xl flex items-center justify-center min-w-[160px]">
-          Submit
+        <button onclick="submitSurvey()" id="submitBtn" class="btn-primary font-extrabold py-3 px-12 rounded-xl shadow-lg flex items-center justify-center min-w-[160px]">
+          Submit Survey
         </button>
       </div>
     </section>
 
+    <!-- STEP 7: Success / Loading Screen -->
     <section id="step7" class="step-container text-center space-y-6 py-16">
       
+      <!-- Loading Animation -->
       <div id="loadingState" class="space-y-6">
         <div class="inline-block relative w-20 h-20">
-          <div class="absolute top-0 left-0 w-full h-full border-4 border-white/30 rounded-full"></div>
-          <div class="absolute top-0 left-0 w-full h-full border-4 border-white rounded-full border-t-transparent animate-spin"></div>
+          <div class="absolute top-0 left-0 w-full h-full border-4 border-sky-200 rounded-full"></div>
+          <div class="absolute top-0 left-0 w-full h-full border-4 border-sky-600 rounded-full border-t-transparent animate-spin"></div>
         </div>
-        <h2 class="text-2xl font-bold text-white drop-shadow-md animate-pulse">Processing Submission...</h2>
+        <h2 class="text-2xl font-bold text-slate-800 animate-pulse">Processing Submission...</h2>
       </div>
 
+      <!-- Success State -->
       <div id="successState" class="hidden space-y-6">
-        <div class="mx-auto w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-2xl transform scale-0 animate-[popIn_0.5s_ease-out_forwards]">
-          <svg class="w-12 h-12 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        <div class="mx-auto w-24 h-24 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full flex items-center justify-center shadow-xl transform scale-0 animate-[popIn_0.5s_ease-out_forwards]">
+          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
         </div>
-        <h1 class="text-4xl font-extrabold text-white drop-shadow-md">Submission Successful!</h1>
-        <p class="text-white/90 font-medium text-lg">Your data has been securely recorded. A confirmation email has been automatically dispatched to your inbox.</p>
+        <h1 class="text-4xl font-extrabold text-slate-900">Submission Successful!</h1>
+        <p class="text-slate-600 font-medium text-lg">Your data has been securely recorded. A confirmation email has been dispatched to your inbox.</p>
       </div>
 
     </section>
@@ -373,7 +418,32 @@
     // --- 1. Your Apps Script Web App URL ---
     const APPS_SCRIPT_URL = "YOUR_WEB_APP_URL_HERE";
 
-    // --- 2. Real-time Matrix Math ---
+    // --- 2. Conditional Logic (Skip/Disable) & Real-time Math ---
+    
+    // Disable logic for Yes/No dropdowns
+    document.querySelectorAll('.currently-used').forEach(select => {
+      select.addEventListener('change', (e) => {
+        const row = e.target.closest('tr');
+        const inputs = row.querySelectorAll('.row-calc');
+        const total = row.querySelector('.row-total');
+        
+        if (e.target.value === 'No') {
+          // Disable and reset to 0
+          inputs.forEach(input => {
+            input.disabled = true;
+            input.value = 0;
+          });
+          total.textContent = '0';
+        } else {
+          // Enable inputs
+          inputs.forEach(input => {
+            input.disabled = false;
+          });
+        }
+      });
+    });
+
+    // Auto-sum math logic
     document.querySelectorAll('.row-calc').forEach(input => {
       input.addEventListener('input', (e) => {
         const row = e.target.closest('tr');
@@ -417,15 +487,14 @@
       // Transition to Loading Screen
       navigate(6, 7);
 
-      // Package the data for Apps Script
+      // Package the data for Apps Script (Remarks removed)
       const payload = {
         meta: {
           company: document.getElementById('company').value || "N/A",
           representative: document.getElementById('representative').value || "N/A",
           position: document.getElementById('position').value || "N/A",
           contact: document.getElementById('contact').value || "N/A",
-          email: document.getElementById('email').value,
-          remarks: document.getElementById('remarksData').value || "None"
+          email: document.getElementById('email').value
         },
         skillsData: []
       };
@@ -433,7 +502,6 @@
       // Grab the matrix data dynamically from ALL steps
       document.querySelectorAll('tbody tr').forEach(row => {
         
-        // Handle "Other Skills" text input vs standard label
         const standardSkillName = row.querySelector('.skill-name');
         const otherSkillName = row.querySelector('.other-skill-name');
         let skillName = "";
@@ -444,18 +512,18 @@
             skillName = otherSkillName.value.trim();
         }
 
-        // Skip rows without a skill name (e.g., empty "Other Skills" inputs)
+        // Skip rows without a skill name
         if (!skillName) return;
 
         const currentlyUsedDrop = row.querySelector('.currently-used');
-        const currentlyUsed = currentlyUsedDrop ? currentlyUsedDrop.value : "N/A"; // "N/A" for Other Skills since it lacks this column
+        const currentlyUsed = currentlyUsedDrop ? currentlyUsedDrop.value : "N/A";
         
         const noNc = parseInt(row.querySelector('.no-nc').value) || 0;
         const withNc = parseInt(row.querySelector('.with-nc').value) || 0;
         const prospective = parseInt(row.querySelector('.prospective').value) || 0;
         const total = noNc + withNc + prospective;
 
-        // Only send rows that have data, are marked as 'Yes', or are a manually entered "Other Skill"
+        // Only send active rows
         if (total > 0 || currentlyUsed === "Yes" || otherSkillName) {
           payload.skillsData.push({
             skillName: skillName, 
@@ -469,7 +537,6 @@
       });
 
       try {
-        // Send data to Google Apps Script
         await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
@@ -484,7 +551,7 @@
       } catch (error) {
         alert('Failed to send data. Please check your network connection.');
         console.error('Submission Error:', error);
-        navigate(7, 6); // Go back to final step on failure
+        navigate(7, 6); 
       }
     }
   </script>
