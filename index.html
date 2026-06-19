@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modern Skills Survey</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <style>
     /* Animated Gradient Background */
     body {
@@ -87,14 +87,14 @@
 <body class="flex items-center justify-center p-4 md:p-8">
 
   <main class="glass w-full max-w-5xl rounded-3xl p-8 md:p-12 relative overflow-hidden text-slate-800">
-    
+
     <!-- STEP 1: Introduction & Profile -->
     <section id="step1" class="step-container active space-y-8">
       <div class="space-y-2">
         <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Skills Survey</h1>
         <h2 class="text-xl font-semibold text-white/90">Cover Letter & Profile</h2>
       </div>
-      
+
       <div class="glass p-6 rounded-2xl space-y-4 text-slate-800 font-medium text-base leading-relaxed shadow-inner">
         <p>Dear CCA Member,</p>
         <p>Great day. We are sending this Skills Survey to determine the technical training requirements of CCA members. This survey is particularly intended for contractors engaged in civil works and specialty works.</p>
@@ -140,13 +140,16 @@
         <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Skills Inventory</h1>
         <p class="text-white/90 font-medium">Please provide skills data to help CCA plan program/s for your company.</p>
       </div>
-      
+
       <div class="glass rounded-2xl overflow-hidden shadow-inner overflow-x-auto">
         <table class="w-full text-sm text-left">
           <thead class="text-xs uppercase bg-white/40 text-slate-800">
             <tr>
               <th class="px-6 py-4 font-bold">Type of Skills</th>
               <th class="px-4 py-4 font-bold">These skills are currently used in our operations</th>
+              <th class="px-4 py-4 font-bold text-center">No TESDA NC</th>
+              <th class="px-4 py-4 font-bold text-center">With NC</th>
+              <th class="px-4 py-4 font-bold text-center">Prospective Training</th>
               <th class="px-4 py-4 font-bold text-center">No. of workers with skills but no TESDA NC</th>
               <th class="px-4 py-4 font-bold text-center">No. of workers with NC</th>
               <th class="px-4 py-4 font-bold text-center">Prospective No. of Workers for Training or Upskilling</th>
@@ -236,78 +239,6 @@
         </table>
       </div>
 
-        <!-- STEP 3: Main Content (Matrix) -->
-    <section id="step2" class="step-container space-y-6">
-      <div class="space-y-2">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">Skills Inventory</h1>
-        <p class="text-white/90 font-medium">Specialty and finishing works</p>
-      </div>
-      
-      <div class="glass rounded-2xl overflow-hidden shadow-inner overflow-x-auto">
-        <table class="w-full text-sm text-left">
-          <thead class="text-xs uppercase bg-white/40 text-slate-800">
-            <tr>
-              <th class="px-6 py-4 font-bold">Type of Skills</th>
-              <th class="px-4 py-4 font-bold">These skills are currently used in our operations</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with skills but no TESDA NC</th>
-              <th class="px-4 py-4 font-bold text-center">No. of workers with NC</th>
-              <th class="px-4 py-4 font-bold text-center">Prospective No. of Workers for Training or Upskilling</th>
-              <th class="px-4 py-4 font-bold text-center">Total</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-white/20">
-            <!-- Row 1 -->
-            <tr class="hover:bg-white/20 transition-colors">
-              <td class="px-6 py-4 font-bold text-slate-800 skill-name">Construction painting</td>
-              <td class="px-4 py-4">
-                <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
-                  <option value="No">No</option><option value="Yes">Yes</option>
-                </select>
-              </td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
-            </tr>
-            <!-- Row 2 -->
-            <tr class="hover:bg-white/20 transition-colors">
-              <td class="px-6 py-4 font-bold text-slate-800 skill-name">Electrical installation and maintenance</td>
-              <td class="px-4 py-4">
-                <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
-                  <option value="No">No</option><option value="Yes">Yes</option>
-                </select>
-              </td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
-            </tr>
-             <!-- Row 3 -->
-             <tr class="hover:bg-white/20 transition-colors">
-              <td class="px-6 py-4 font-bold text-slate-800 skill-name">Plumbing</td>
-              <td class="px-4 py-4">
-                <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
-                  <option value="No">No</option><option value="Yes">Yes</option>
-                </select>
-              </td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
-            </tr>
-            <!-- Row 4 -->
-             <tr class="hover:bg-white/20 transition-colors">
-              <td class="px-6 py-4 font-bold text-slate-800 skill-name">Tile setting</td>
-              <td class="px-4 py-4">
-                <select class="glass-input w-full rounded-lg p-2 text-slate-800 font-medium focus:ring-2 focus:ring-white currently-used">
-                  <option value="No">No</option><option value="Yes">Yes</option>
-                </select>
-              </td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc no-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc with-nc w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4"><input type="number" min="0" value="0" class="glass-input row-calc prospective w-full rounded-lg p-2 text-center text-slate-800 font-bold"></td>
-              <td class="px-4 py-4 font-black text-xl text-center row-total text-white drop-shadow-md">0</td>
-            </tr>
       <div class="flex justify-between pt-6">
         <button onclick="navigate(2, 1)" class="btn-hover bg-white/30 text-white font-bold py-3 px-8 rounded-xl backdrop-blur-sm border border-white/40 shadow-lg">
           &larr; Back
@@ -318,12 +249,12 @@
       </div>
     </section>
 
-    <!-- STEP 4: Final Section -->
+    <!-- STEP 3: Final Section -->
     <section id="step3" class="step-container space-y-6">
       <div class="space-y-2">
         <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">You have completed the survey.</h1>
       </div>
-      
+
       <div class="glass p-6 rounded-2xl space-y-4 text-slate-800 font-medium text-lg shadow-inner">
         <p>Thank you for accomplishing this skills survey. The Secretariat of CCA will review and consolidate the responses of the members who participated in the survey. We will contact you soon for the next steps of this program.</p>
         <p>If you have additional remarks or comments, please write these on the space provided below. If none, you may click the submit button.</p>
@@ -349,7 +280,7 @@
 
     <!-- STEP 4: Success / Loading Screen -->
     <section id="step4" class="step-container text-center space-y-6 py-16">
-      
+
       <!-- Loading Animation -->
       <div id="loadingState" class="space-y-6">
         <div class="inline-block relative w-20 h-20">
@@ -401,14 +332,14 @@
 
       const fromEl = document.getElementById(`step${fromStep}`);
       const toEl = document.getElementById(`step${toStep}`);
-      
+
       fromEl.classList.remove('active');
       fromEl.classList.add('exit');
-      
+
       setTimeout(() => {
         fromEl.style.display = 'none';
         fromEl.classList.remove('exit');
-        
+
         toEl.style.display = 'block';
         void toEl.offsetWidth; // Force reflow
         toEl.classList.add('active');
@@ -463,7 +394,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        
+
         // Trigger Success State
         document.getElementById('loadingState').classList.add('hidden');
         document.getElementById('successState').classList.remove('hidden');
